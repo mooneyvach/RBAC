@@ -1,0 +1,13 @@
+{
+    "name": "Bun MySQL Dev",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspaces/RBAC",
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+            "version": "latest"
+        }
+    },
+    "forwardPorts": [3000, 8080, 3306],
+    "postCreateCommand": "npm install -g bun && bun install"
+}

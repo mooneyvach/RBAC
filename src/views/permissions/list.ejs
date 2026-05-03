@@ -1,0 +1,49 @@
+<div class="bg-white rounded shadow p-6">
+  <div class="mb-4">
+    <h3 class="font-semibold mb-2">Tambah Permission Baru</h3>
+    <form action="/permissions" method="POST" class="flex gap-3 mb-6">
+      <input type="text" name="name" placeholder="user:create" required class="border rounded px-3 py-2 flex-1"/>
+      <input type="text" name="resource" placeholder="Resource (users)" class="border rounded px-3 py-2 flex-1"/>
+      <input type="text" name="action" placeholder="Action (create)" class="border rounded px-3 py-2 flex-1"/>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Tambah Permission</button>
+    </form>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="font-semibold mb-2">Assign Permission ke Role</h3>
+    <form action="/permissions/assign" method="POST" class="flex gap-3 mb-6">
+      <select name="role_id" class="border rounded px-3 py-2 flex-1">
+        <% roles.forEach(role => { %>
+          <option value="<%= role.id %>"><%= role.name %></option>
+        <% }) %>
+      </select>
+      <select name="permission_id" class="border rounded px-3 py-2 flex-1">
+        <% permissions.forEach(p => { %>
+          <option value="<%= p.id %>"><%= p.name %></option>
+        <% }) %>
+      </select>
+      <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Assign ke Role</button>
+    </form>
+  </div>
+
+  <table class="w-full text-sm">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="text-left px-4 py-2">ID</th>
+        <th class="text-left px-4 py-2">Nama</th>
+        <th class="text-left px-4 py-2">Resource</th>
+        <th class="text-left px-4 py-2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% permissions.forEach(p => { %>
+        <tr class="border-t">
+          <td class="px-4 py-2"><%= p.id %></td>
+          <td class="px-4 py-2"><%= p.name %></td>
+          <td class="px-4 py-2"><%= p.resource %></td>
+          <td class="px-4 py-2"><%= p.action %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

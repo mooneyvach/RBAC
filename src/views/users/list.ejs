@@ -1,0 +1,39 @@
+<div class="bg-white rounded shadow p-6">
+  <h2 class="text-lg font-semibold mb-4">Daftar User</h2>
+
+  <form action="/users" method="POST" class="flex gap-3 mb-6">
+    <input type="text" name="username" placeholder="Username" required class="border rounded px-3 py-2 flex-1"/>
+    <input type="password" name="password" placeholder="Password" required class="border rounded px-3 py-2 flex-1"/>
+    <select name="role_id" class="border rounded px-3 py-2">
+      <% roles.forEach(role => { %>
+        <option value="<%= role.id %>"><%= role.name %></option>
+      <% }) %>
+    </select>
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Tambah</button>
+  </form>
+
+  <table class="w-full text-sm">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="text-left px-4 py-2">ID</th>
+        <th class="text-left px-4 py-2">Username</th>
+        <th class="text-left px-4 py-2">Role</th>
+        <th class="text-left px-4 py-2">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(user => { %>
+        <tr class="border-t">
+          <td class="px-4 py-2"><%= user.id %></td>
+          <td class="px-4 py-2"><%= user.username %></td>
+          <td class="px-4 py-2"><%= user.role_name %></td>
+          <td class="px-4 py-2">
+            <form action="/users/<%= user.id %>?_method=DELETE" method="POST">
+              <button type="submit" class="text-red-500 hover:underline">Hapus</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

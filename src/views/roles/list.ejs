@@ -1,0 +1,33 @@
+<div class="bg-white rounded shadow p-6">
+  <h2 class="text-lg font-semibold mb-4">Daftar Role</h2>
+
+  <form action="/roles" method="POST" class="flex gap-3 mb-6">
+    <input type="text" name="name" placeholder="Nama role (admin/editor/viewer)" required class="border rounded px-3 py-2 flex-1"/>
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Tambah</button>
+  </form>
+
+  <table class="w-full text-sm">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="text-left px-4 py-2">ID</th>
+        <th class="text-left px-4 py-2">Nama Role</th>
+        <th class="text-left px-4 py-2">Dibuat</th>
+        <th class="text-left px-4 py-2">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% roles.forEach(role => { %>
+        <tr class="border-t">
+          <td class="px-4 py-2"><%= role.id %></td>
+          <td class="px-4 py-2"><%= role.name %></td>
+          <td class="px-4 py-2"><%= new Date(role.created_at).toLocaleDateString('id-ID') %></td>
+          <td class="px-4 py-2">
+            <form action="/roles/<%= role.id %>?_method=DELETE" method="POST">
+              <button type="submit" class="text-red-500 hover:underline">Hapus</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
